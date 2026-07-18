@@ -154,8 +154,9 @@ para `/dashboard`.
 
 ## 9. Deploy
 
-- **GitHub:** `DGomesdpaulagit/protocolo-ouro` (público), branch `main`.
-- **Vercel:** projeto `protocolo-ouro`, time `davi-gomes-de-paula-s-projects` (`team_MRVYZqokJ4zZjm07oxoS6iqB`), conectado ao GitHub — todo push em `main` builda e publica em produção automaticamente. URL: https://protocolo-ouro.vercel.app.
+- **GitHub:** `DGomesdpaulagit/the-one-porcent` (público, renomeado de `protocolo-ouro` na sessão 004), branch `main`.
+- **Vercel:** projeto `the-one-porcent` (mesmo `id` desde a criação: `prj_tP7JpJ1QwqrtIQpgdOCrromTBMnO`), time `davi-gomes-de-paula-s-projects` (`team_MRVYZqokJ4zZjm07oxoS6iqB`), conectado ao GitHub — todo push em `main` builda e publica em produção automaticamente. URL: https://the-one-porcent.vercel.app.
+- **Nota sobre o rename de domínio:** renomear o "Project Name" na Vercel não move automaticamente o domínio `.vercel.app` — foi preciso adicionar `the-one-porcent.vercel.app` manualmente em Project Settings → Domains. O domínio antigo `protocolo-ouro.vercel.app` continua listado no projeto (Vercel não remove domínios antigos sozinho); pode ser removido manualmente se não for mais necessário.
 - Variáveis de ambiente configuradas diretamente no dashboard da Vercel (Project Settings → Environment Variables) — mesmas duas do `.env.local`. Se o projeto Supabase mudar (nova URL/key), atualizar nos dois lugares.
 
 ## 10. Convenção de conteúdo (importante)

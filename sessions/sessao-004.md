@@ -110,12 +110,32 @@ rebrand inclui GitHub/Vercel/URL).
 | `package.json` | nome `the-one-porcent`, versão 1.2.0, + framer-motion/lucide-react |
 | `MEMORY.md`, `MEMORY_CORE.md`, `CHANGELOG.md`, `DECISIONS.md` | atualizados |
 
+## Rebrand externo (GitHub + Vercel + URL) — concluído
+
+Depois do redesign, o usuário renomeou manualmente (únicos passos que
+precisam de ação humana, sem ferramenta automática disponível):
+- GitHub: `protocolo-ouro` → `the-one-porcent` (dashboard de settings do repo)
+- Vercel: nome do projeto `protocolo-ouro` → `the-one-porcent` (Project Settings)
+
+Detalhe não óbvio: renomear o "Project Name" na Vercel **não** move o
+domínio `.vercel.app` automaticamente — foi preciso adicionar
+`the-one-porcent.vercel.app` manualmente em Project Settings → Domains.
+O domínio antigo `protocolo-ouro.vercel.app` continua listado no projeto
+(Vercel não remove domínios antigos sozinho).
+
+Depois da rename:
+- `git remote set-url origin` atualizado pro novo endereço do GitHub —
+  confirmado com `git ls-remote` (a URL antiga deu "Repository not found"
+  na primeira tentativa, funcionou alguns segundos depois — provavelmente
+  só demora um instante pra propagar).
+- Nova URL de produção testada: `curl` retornou `307` → `/login` → `200`.
+- `get_runtime_errors` (Vercel MCP): nenhum erro.
+- Projeto Supabase **não** foi renomeado (D009) — continua `protocolo-ouro`
+  internamente, não afeta nada visível ao usuário.
+
 ## Status para retomar
 
-- App redesenhado e funcional, build limpo, sem bugs ativos conhecidos.
-- Rebrand in-app completo. Rebrand externo (GitHub/Vercel/URL) pendente de
-  execução — próximos passos manuais documentados no fim desta sessão, a
-  serem feitos pelo usuário via dashboard (sem ferramenta automática
-  disponível para rename de repositório GitHub ou projeto Vercel).
+- App redesenhado, rebrand completo (in-app + GitHub + Vercel + URL),
+  tudo em produção, sem bugs ativos conhecidos.
 - Decisão em aberto: vídeos do YouTube em Posições (D008) — aguardando
   feedback do usuário sobre o resultado visual das animações.

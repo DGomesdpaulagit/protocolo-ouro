@@ -2,16 +2,17 @@
 
 # CLAUDE.md — Instruções do Projeto
 
-**Protocolo Ouro** — app pessoal de treino mental e tático para um jogador de
-futebol sub-14, afastado por lesão. Curso estilo Duolingo (20 lições em 4
-blocos, desbloqueio sequencial) + consulta rápida de Posições, sempre
-disponível independente do progresso.
+**THE ONE PORCENT** (renomeado de "Protocolo Ouro" na sessão 004) — app
+pessoal de treino mental e tático para um jogador de futebol sub-14,
+afastado por lesão. Curso estilo Duolingo (20 lições em 4 blocos,
+desbloqueio sequencial) + consulta rápida de Posições, sempre disponível
+independente do progresso.
 
 ## Stack
 
-- **Frontend:** Next.js 16 (App Router, Turbopack), Tailwind CSS v4, TypeScript
-- **Backend/dados:** Supabase (Postgres + Auth) — projeto `protocolo-ouro`, ref `pbbzozeztqrenpfnhylp`
-- **Deploy:** Vercel (ainda não configurado — ver `MEMORY_CORE.md`)
+- **Frontend:** Next.js 16 (App Router, Turbopack), Tailwind CSS v4, TypeScript, framer-motion, lucide-react
+- **Backend/dados:** Supabase (Postgres + Auth) — projeto interno `protocolo-ouro` (não renomeado, é invisível ao usuário final), ref `pbbzozeztqrenpfnhylp`
+- **Deploy:** Vercel, projeto `the-one-porcent`
 
 ## Comandos
 
@@ -41,9 +42,9 @@ Executar sempre ao concluir um bloco de trabalho significativo:
 2. **Commit + Push:**
    - `git add` dos arquivos específicos (nunca `git add -A` sem checar antes).
    - Commit descritivo (o quê + por quê).
-   - `git push origin main` — remoto: `https://github.com/DGomesdpaulagit/protocolo-ouro` (público).
+   - `git push origin main` — remoto: `https://github.com/DGomesdpaulagit/the-one-porcent` (público).
 3. **Deploy:**
-   - **Automático.** Vercel está conectado ao GitHub (projeto `protocolo-ouro`, time `davi-gomes-de-paula-s-projects`) — todo push em `main` dispara build e deploy de produção sozinho, não precisa rodar nenhum comando. URL: https://protocolo-ouro.vercel.app.
+   - **Automático.** Vercel está conectado ao GitHub (projeto `the-one-porcent`, time `davi-gomes-de-paula-s-projects`) — todo push em `main` dispara build e deploy de produção sozinho, não precisa rodar nenhum comando. URL: https://the-one-porcent.vercel.app.
    - Variáveis de ambiente (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`) já configuradas no projeto Vercel — só mudam se o projeto Supabase mudar (ver `docs/SUPABASE_SETUP.md`).
 4. **Resumo final pro usuário:** checklist numerado (ver `metodo-registro-e-continuidade.md` na pasta `Documents` para o formato exato), depois 1-2 parágrafos em prosa.
 

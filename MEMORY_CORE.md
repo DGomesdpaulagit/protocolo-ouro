@@ -6,7 +6,7 @@
 
 **Data:** 2026-07-18
 **Versão:** 1.2.0 — redesign completo + rebrand para THE ONE PORCENT
-**Status:** App redesenhado (sidebar, dashboards, animações framer-motion, página de Configurações) e renomeado de "Protocolo Ouro" para "THE ONE PORCENT" dentro do app. Rename externo (GitHub/Vercel/URL) em andamento — ver seção Deploy abaixo e `sessions/sessao-004.md`.
+**Status:** App no ar em https://the-one-porcent.vercel.app. Rebrand completo (in-app + GitHub + Vercel + URL) concluído. Repositório: `DGomesdpaulagit/the-one-porcent`.
 
 ## ✅ O QUE ESTÁ PRONTO
 
@@ -30,15 +30,10 @@
 
 ## 🎯 PRÓXIMA SESSÃO
 
-Roadmap funcional 100% entregue. Pendente apenas a finalização do rebrand
-externo: renomear o repositório no GitHub e o projeto na Vercel para
-`the-one-porcent` (a URL de produção muda). Ver `sessions/sessao-004.md`
-para o passo a passo — depende de ações manuais do usuário (renomear via
-dashboard), sem ferramenta automática disponível pra isso.
-
-Se o usuário topar, o próximo passo natural depois disso seria decidir
-sobre os vídeos do YouTube em Posições (ele pediu pra ver as animações
-primeiro e decidir depois).
+Roadmap funcional e rebrand 100% entregues, tudo em produção. Nenhuma
+tarefa obrigatória pendente. Decisão em aberto pro usuário: se quiser
+vídeos reais do YouTube na página de Posições (D008) — ele pediu pra
+avaliar as animações primeiro antes de decidir.
 
 ## 🐛 BUGS CONHECIDOS
 

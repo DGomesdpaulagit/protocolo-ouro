@@ -1,4 +1,7 @@
-# Supabase Setup — Protocolo Ouro
+# Supabase Setup — THE ONE PORCENT
+
+> Nome do projeto Supabase em si continua `protocolo-ouro` internamente
+> (não renomeado — é invisível ao usuário final, ver `DECISIONS.md` D009).
 
 Guia de configuração do Supabase para este projeto. Não é sobre progresso,
 é manual — atualizar só quando a infraestrutura mudar.

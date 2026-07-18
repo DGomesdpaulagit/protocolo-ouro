@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# obsidian (vault local config, se este repo for aberto como vault)
+.obsidian/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

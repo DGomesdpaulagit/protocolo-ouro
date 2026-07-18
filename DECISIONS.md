@@ -113,5 +113,16 @@
 Usuário pediu vídeo explicativo por posição (com simulação de campo,
 setas, adversários) além do áudio. Dado o custo/esforço de gerar vídeo
 pra 4 posições, foi combinado fazer **um piloto só do Volante primeiro**
-pra avaliar qualidade antes de decidir sobre as outras 3. Ainda não
-executado — ver `MEMORY_CORE.md` "Próxima sessão".
+pra avaliar qualidade antes de decidir sobre as outras 3. Bloqueado por
+falta de créditos na ferramenta de geração — ver D013 e
+`MEMORY_CORE.md` "Vídeo piloto — decisões já tomadas" (todas as escolhas
+de estilo/formato já foram feitas, só falta crédito pra executar).
+
+## D013 — Projeto pausado (Supabase pausado) por limite de 2 projetos ativos no plano grátis
+
+**Data:** 2026-07-18 · sessao-006
+**Contexto:** O piloto de vídeo ficou bloqueado por falta de créditos na Higgsfield (ver nota acima). Nesse momento, o usuário decidiu pausar o projeto inteiro — ele tem só 2 vagas de projeto ativo no plano grátis do Supabase, e precisa dessa vaga pra outros dois projetos que estão pendentes de terminar. THE ONE PORCENT era "uma ideia que achei fácil, mas não é" — fica pra quando tiver orçamento pra resolver a parte do vídeo.
+**Decisão:** Projeto Supabase `pbbzozeztqrenpfnhylp` pausado via `pause_project` (reversível, dados preservados). Nenhuma mudança de código — é só uma pausa de infraestrutura. O site em produção (`the-one-porcent.vercel.app`) fica fora do ar como consequência direta e esperada (o app depende do Supabase em runtime).
+**Motivo:** Pedido explícito do usuário — libera a vaga de projeto ativo no Supabase pros outros dois projetos que ele precisa terminar primeiro.
+**Trade-off:** App fica inacessível pro usuário final até ser restaurado. GitHub e Vercel não foram tocados (não têm o mesmo limite de "projetos ativos" do Supabase, não havia motivo pra pausar eles também).
+**Revisitar quando:** Quando o usuário voltar com orçamento/tempo pra continuar — `restore_project` no Supabase é o primeiro passo (ver `MEMORY_CORE.md` "COMO RETOMAR").

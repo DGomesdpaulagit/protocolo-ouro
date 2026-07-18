@@ -6,7 +6,27 @@
 
 **Data:** 2026-07-18
 **Versão:** 1.4.0 — nome de usuário, layout de Posições corrigido, narração em áudio
-**Status:** App no ar em https://the-one-porcent.vercel.app. Repositório: `DGomesdpaulagit/the-one-porcent`.
+**Status:** ⏸️ **PROJETO PAUSADO** a pedido do usuário. Projeto Supabase
+(`pbbzozeztqrenpfnhylp`) pausado (`pause_project`) pra liberar vaga no
+limite de 2 projetos ativos do plano grátis — o usuário tem outros
+projetos pra terminar primeiro. Como o app depende do Supabase em tempo
+de execução, **o site em produção (https://the-one-porcent.vercel.app)
+vai ficar fora do ar** (erros de conexão) enquanto o banco estiver
+pausado — isso é esperado, não é um bug. Repositório:
+`DGomesdpaulagit/the-one-porcent`.
+
+## ▶️ COMO RETOMAR
+
+1. Restaurar o banco: `restore_project` no projeto Supabase
+   `pbbzozeztqrenpfnhylp` (MCP do Supabase) — leva alguns minutos, dados
+   preservados, nada se perde.
+2. Conferir que o site voltou (recarregar https://the-one-porcent.vercel.app).
+3. Retomar o item pendente da sessão 006: vídeo piloto da posição Volante
+   (ver seção "Vídeo piloto" abaixo) — usuário estava sem créditos na
+   ferramenta de geração (Higgsfield), precisa assinar um plano (Plus,
+   ~$49/mês/1000 créditos, ou Ultra) ou usar o teste grátis de 3 dias
+   (100 créditos, pede cartão, renova automático) antes de continuar essa
+   parte específica. O resto do app está 100% funcional sem isso.
 
 ## ✅ O QUE ESTÁ PRONTO
 
@@ -39,11 +59,34 @@
 
 ## 🎯 PRÓXIMA SESSÃO
 
-Roadmap funcional, rebrand e polish 100% entregues, tudo em produção.
-Próximo passo combinado com o usuário: gerar um **vídeo piloto da posição
-Volante** pra ele avaliar qualidade/custo antes de decidir se faz as
-outras 3 posições em vídeo também (ver D008 e a pergunta feita na sessão
-006). Ainda não foi feito.
+Roadmap funcional, rebrand e polish 100% entregues, tudo em produção
+(quando o Supabase for restaurado). Projeto pausado a pedido do usuário
+em 2026-07-18 — sem tarefa obrigatória pendente além de retomar quando
+ele voltar. Ver "COMO RETOMAR" acima.
+
+### Vídeo piloto — decisões já tomadas (não perguntar de novo)
+
+Todo o Phase 0 do fluxo `video-explainer` (MCP Higgsfield/`4b8fed24-...`)
+já foi decidido com o usuário na sessão 006 — só falta executar quando ele
+tiver créditos:
+
+- **Posição piloto:** Volante (só essa, pra avaliar antes das outras 3)
+- **Estilo:** "Whiteboard Doodle" (`preset_id: b347d852-98fc-4013-92b7-6b0219fb21be`,
+  `media_id` já resolvido: `24a3bc5d-4f1e-40e3-b07a-d8f11dc3de21` — pode
+  ter expirado, reconferir/re-resolver se necessário)
+- **Duração:** 1 minuto = 6 blocos de 10s
+- **Personagem:** sem mascote (faceless, só cenas de campo/tática)
+- **Legenda:** ligada, fonte `patrick`
+- **Idioma da narração:** português (pt-BR)
+- **Custo estimado:** ~181 créditos (180 vídeo + ~1 áudio/legenda) — o
+  usuário estava com 0 créditos (plano grátis) na Higgsfield; precisa de
+  Plus (~$49/mês, 1000 créditos) ou Ultra, ou o teste grátis de 3 dias
+  (100 créditos, não cobre o piloto inteiro sozinho)
+- Narração (6 blocos, PT-BR) e estrutura de cena por bloco já foram
+  rascunhadas na sessão 006 cobrindo: intro/papel do volante, função
+  tática, fundamentos técnicos, erros comuns, treino, aspectos mentais —
+  reconstruir a partir do conteúdo real de `positions_content` (position
+  = 'volante') se for retomar, já que não foram salvas em arquivo.
 
 ## 🐛 BUGS CONHECIDOS
 

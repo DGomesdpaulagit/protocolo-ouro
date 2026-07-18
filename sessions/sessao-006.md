@@ -102,8 +102,44 @@ combinado com o usuário.
 | `src/app/(app)/posicoes/page.tsx` | `max-w-2xl` → `max-w-4xl` |
 | `package.json` | versão 1.3.0 → 1.4.0 |
 
+## Adendo — vídeo piloto iniciado e projeto pausado (mesma sessão)
+
+Depois do deploy de v1.4.0, iniciei o vídeo piloto da posição Volante
+seguindo o workflow `video-explainer` da MCP Higgsfield:
+
+1. Fase 0 (obrigatória, em duas rodadas separadas) concluída com o
+   usuário: estilo **Whiteboard Doodle** (`preset_id`
+   `b347d852-98fc-4013-92b7-6b0219fb21be`, resolvido pra `media_id`
+   `24a3bc5d-4f1e-40e3-b07a-d8f11dc3de21`), 1 minuto (6 blocos de 10s),
+   sem mascote (faceless), legenda ligada (fonte `patrick`), narração em
+   português.
+2. Preflight de custo antes de gerar qualquer coisa: `generate_video`
+   (`gemini_omni`, 10s, 720p) = 30 créditos/bloco; `generate_audio`
+   (`seed_audio`) = 0,1 crédito/bloco; total do piloto ≈ 181 créditos.
+3. `balance` mostrou **0 créditos** (plano grátis) — bloqueado. Mostrado
+   ao usuário: sem pacote avulso de créditos disponível no momento, só
+   assinatura (Plus ~$49/mês/1000 créditos, Ultra ~$99/mês/3000
+   créditos) ou teste grátis de 3 dias (100 créditos, pede cartão, renova
+   automático pra Plus). Não prossegui — decisão de gastar dinheiro é do
+   usuário.
+4. Usuário decidiu **pausar o projeto inteiro** por enquanto: tem só 2
+   vagas de projeto ativo no plano grátis do Supabase, e precisa liberar
+   espaço pra outros dois projetos que estão pendentes. Vai retomar
+   quando tiver orçamento pra resolver a parte do vídeo.
+5. Projeto Supabase `pbbzozeztqrenpfnhylp` pausado via `pause_project`
+   (reversível — dados preservados, restaura com `restore_project`).
+   Como consequência esperada, o site em produção fica fora do ar
+   enquanto o banco estiver pausado.
+6. `DECISIONS.md` D013 registra essa decisão. `MEMORY_CORE.md` tem uma
+   seção "COMO RETOMAR" com os passos exatos e todas as decisões da Fase
+   0 do vídeo já anotadas, pra não precisar perguntar de novo.
+
 ## Status para retomar
 
-- App em produção, sem bugs ativos conhecidos, lint e build limpos.
-- Próximo passo combinado: vídeo piloto da posição Volante, pra avaliar
-  antes de decidir sobre as outras 3 posições.
+- ⏸️ **Projeto pausado** a pedido do usuário — Supabase pausado, site
+  fora do ar (esperado). Nenhum código quebrado, é só infraestrutura
+  pausada.
+- Quando retomar: `restore_project` no Supabase primeiro (ver
+  `MEMORY_CORE.md` "COMO RETOMAR"), depois decidir sobre o vídeo piloto
+  (créditos/assinatura na Higgsfield) — todas as escolhas de estilo já
+  estão registradas, não precisa perguntar de novo ao usuário.

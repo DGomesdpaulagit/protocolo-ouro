@@ -5,7 +5,7 @@
 ## 📍 ESTADO ATUAL
 
 **Data:** 2026-07-18
-**Versão:** 1.3.0 — sistema de metas com coaching + polish (favicon, streak, som, skeletons)
+**Versão:** 1.4.0 — nome de usuário, layout de Posições corrigido, narração em áudio
 **Status:** App no ar em https://the-one-porcent.vercel.app. Repositório: `DGomesdpaulagit/the-one-porcent`.
 
 ## ✅ O QUE ESTÁ PRONTO
@@ -33,13 +33,17 @@
 - [x] Som de sucesso (Web Audio API, sintetizado) ao concluir uma lição
 - [x] Loading states (skeleton) em todas as rotas autenticadas via `loading.tsx`
 - [x] Posições redesenhado como carrossel passo a passo (uma seção por vez, setas + pontos de navegação) com animações contextuais no diagrama de campo por tipo de seção
+- [x] Nome de usuário editável (campo no cadastro + edição em Configurações, via `user_metadata.display_name` do Supabase Auth) — dashboard usa o nome em vez do prefixo do e-mail
+- [x] Layout de Posições corrigido: campo de futebol fica fixo (sticky) enquanto o texto rola, e vira coluna lateral no desktop — resolve a reclamação de "não consigo ver o campo enquanto leio"
+- [x] Narração em áudio automática por etapa em Posições (Web Speech API, voz pt-BR, sem custo), com botão de mudo
 
 ## 🎯 PRÓXIMA SESSÃO
 
 Roadmap funcional, rebrand e polish 100% entregues, tudo em produção.
-Nenhuma tarefa obrigatória pendente. Decisão em aberto pro usuário: se
-quiser vídeos reais do YouTube na página de Posições (D008) — ele já viu
-as animações e por enquanto não pediu vídeo, mas pode revisitar.
+Próximo passo combinado com o usuário: gerar um **vídeo piloto da posição
+Volante** pra ele avaliar qualidade/custo antes de decidir se faz as
+outras 3 posições em vídeo também (ver D008 e a pergunta feita na sessão
+006). Ainda não foi feito.
 
 ## 🐛 BUGS CONHECIDOS
 

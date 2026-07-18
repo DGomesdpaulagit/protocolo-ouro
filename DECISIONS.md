@@ -98,3 +98,20 @@
 **Motivo:** Preferência explícita do usuário, e faz sentido dado o tamanho novo da funcionalidade (plano com múltiplas etapas por meta não cabe bem dentro de uma seção de Configurações).
 **Trade-off:** A sidebar volta a ter 5 itens em vez dos 4 que o usuário tinha pedido originalmente — mudança de requisito explícita, não um desvio silencioso.
 **Revisitar quando:** N/A — decisão atual, revisitar só se o usuário pedir pra consolidar de novo.
+
+## D012 — Narração em Posições usa a voz nativa do navegador (Web Speech API), não voz gerada
+
+**Data:** 2026-07-18 · sessao-006
+**Contexto:** Usuário pediu áudio narrando o texto de cada etapa em Posições, com "voz grave" lendo automaticamente ao entrar na seção.
+**Decisão:** Implementado com a `SpeechSynthesis` nativa do navegador (`window.speechSynthesis`) — gratuita, sem chave de API, funciona offline, toca automaticamente. O código tenta escolher uma voz pt-BR e, se o navegador expõe essa informação no nome da voz, prefere uma que soe masculina/grave.
+**Motivo:** Zero custo, zero infraestrutura nova (nada pra gerar, armazenar ou servir), funciona pra qualquer texto (inclusive lições futuras) sem trabalho manual por conteúdo. A alternativa (gerar áudio com um serviço de voz tipo ElevenLabs, via `mcp__4b8fed24-...__generate_audio`/`create_voice`) teria qualidade de voz muito melhor e consistente, mas exigiria gerar e armazenar um arquivo de áudio por seção (20 lições × trechos + 21 linhas de `positions_content` = bastante conteúdo), consumir créditos, e resolver hospedagem dos arquivos (Supabase Storage ou similar) — escopo bem maior.
+**Trade-off:** Qualidade e disponibilidade de voz variam por navegador/SO do usuário — em alguns sistemas pode não ter voz pt-BR instalada, ou soar robótica. Sem controle sobre o "tom" exato que o usuário imaginou.
+**Revisitar quando:** Se o usuário testar e achar a qualidade da voz nativa insuficiente, considerar migrar pra voz gerada (aceitando o custo) — provavelmente começando pelas 20 lições do curso, que são conteúdo fixo (compensa gerar uma vez), diferente de metas/conteúdo dinâmico.
+
+## Pendente — Vídeo piloto (posição Volante)
+
+Usuário pediu vídeo explicativo por posição (com simulação de campo,
+setas, adversários) além do áudio. Dado o custo/esforço de gerar vídeo
+pra 4 posições, foi combinado fazer **um piloto só do Volante primeiro**
+pra avaliar qualidade antes de decidir sobre as outras 3. Ainda não
+executado — ver `MEMORY_CORE.md` "Próxima sessão".

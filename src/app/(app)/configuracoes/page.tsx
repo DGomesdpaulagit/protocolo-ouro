@@ -3,6 +3,7 @@ import { User, Target, History, Info, ChevronRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { FadeIn } from "@/components/fade-in";
 import { SignOutButton } from "@/components/sign-out-button";
+import { DisplayNameForm } from "@/components/display-name-form";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("pt-BR", {
@@ -24,6 +25,11 @@ export default async function ConfiguracoesPage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const displayName =
+    (user?.user_metadata?.display_name as string | undefined)?.trim() ||
+    user?.email?.split("@")[0] ||
+    "";
 
   const [{ count: goalsCount }, { data: history }] = await Promise.all([
     supabase
@@ -62,8 +68,11 @@ export default async function ConfiguracoesPage() {
             <User size={18} />
           </div>
           <div>
-            <p className="text-sm font-medium">{user?.email}</p>
-            <p className="text-xs text-muted">Conta</p>
+            <p className="text-sm font-medium">{displayName}</p>
+            <p className="text-xs text-muted">{user?.email}</p>
+            <div className="mt-1.5">
+              <DisplayNameForm initialName={displayName} />
+            </div>
           </div>
         </div>
         <SignOutButton />
@@ -122,7 +131,7 @@ export default async function ConfiguracoesPage() {
 
       <FadeIn delay={0.2} className="card flex items-center gap-3 p-5 text-sm text-muted">
         <Info size={16} className="text-gold" />
-        THE ONE PORCENT — v1.3.0
+        THE ONE PORCENT — v1.4.0
       </FadeIn>
     </div>
   );

@@ -11,7 +11,7 @@ export default async function PosicoesPage() {
     .neq("position", "geral");
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-6 px-4 py-6 md:px-8 md:py-10">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-6 md:px-8 md:py-10">
       <FadeIn>
         <h1 className="text-2xl font-bold md:text-3xl">Posições</h1>
         <p className="mt-1 text-sm text-muted">

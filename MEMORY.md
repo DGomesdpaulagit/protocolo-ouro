@@ -63,9 +63,10 @@ src/
 │   ├── radial-progress.tsx       ← anel de progresso SVG animado
 │   ├── course-list.tsx           ← lista de blocos/lições com stagger animation
 │   ├── position-field.tsx        ← diagrama SVG de campo, marcadores por posição + motivo animado por seção
-│   ├── positions-view.tsx        ← carrossel de etapas + campo (client)
+│   ├── positions-view.tsx        ← campo fixo (sticky/lateral) + carrossel de etapas + narração (client)
 │   ├── goal-form.tsx             ← formulário de nova meta (client)
 │   ├── goal-card.tsx             ← plano da meta: milestones sequenciais + práticas contínuas (client)
+│   ├── display-name-form.tsx     ← editar nome de exibição (client, chama supabase.auth.updateUser)
 │   ├── sign-out-button.tsx       ← botão de logout reutilizável
 │   ├── markdown-lite.tsx         ← renderizador leve (## headers, - listas, **negrito**)
 │   └── complete-lesson-button.tsx ← botão "marcar como concluída" com animação + som de sucesso
@@ -74,6 +75,7 @@ src/
 │   ├── goal-templates.ts        ← matchGoalTemplate() — planos pré-escritos (capitão, cobrador, genérico)
 │   ├── streak.ts                 ← computeStreak() — sequência de dias com lição concluída
 │   ├── sound.ts                  ← playSuccessChime()/primeAudio() — Web Audio API, sem asset externo
+│   ├── use-speech.ts             ← useSpeech() — narração via Web Speech API (SpeechSynthesis), sem custo/API externa
 │   └── supabase/
 │       ├── client.ts            ← cliente browser
 │       ├── server.ts             ← cliente server component (cookies)
@@ -180,6 +182,15 @@ padrão do Supabase — não desativado). `src/proxy.ts` redireciona usuário n�
 autenticado para `/login` e usuário autenticado tentando acessar `/login`
 para `/dashboard`.
 
+**Nome de exibição:** guardado em `user.user_metadata.display_name` (não é
+uma tabela própria — é o metadata nativo do Supabase Auth). Definido no
+cadastro (`options.data.display_name` no `signUp()`) e editável em
+`/configuracoes` via `supabase.auth.updateUser({ data: { display_name } })`
+direto do client component (`display-name-form.tsx`), sem server action —
+o SDK do Supabase já lida com a sessão via cookie. Sempre ler com fallback
+pro prefixo do e-mail (`user?.email?.split("@")[0]`), pra contas antigas
+que não têm o metadata setado ainda.
+
 ## 9. Deploy
 
 - **GitHub:** `DGomesdpaulagit/the-one-porcent` (público, renomeado de `protocolo-ouro` na sessão 004), branch `main`.
@@ -240,3 +251,15 @@ meta, isso exigiria integrar uma API de LLM (custo + chave de API) — ver
 - **Favicon**: `src/app/icon.tsx` gera um "1%" em gradiente dourado sobre
   fundo escuro via `next/og` `ImageResponse` — não é um arquivo estático,
   é gerado em build/request.
+- **Layout de Posições (sessão 006)**: o campo de futebol (`PositionField`)
+  fica em `sticky top-0` no mobile (não some ao rolar o texto) e vira uma
+  coluna lateral fixa (`md:grid-cols-[260px_1fr]`) no desktop, ao lado do
+  carrossel de etapas em vez de empilhado acima dele. Página usa
+  `max-w-4xl` em vez de `max-w-2xl` pra caber as duas colunas.
+- **Narração em áudio (sessão 006)**: `src/lib/use-speech.ts` usa a
+  `SpeechSynthesis` nativa do navegador (Web Speech API) — sem custo, sem
+  chave de API, mas depende das vozes instaladas no sistema/navegador do
+  usuário (qualidade e disponibilidade de voz pt-BR variam). Toca
+  automaticamente ao entrar em cada etapa/posição de `/posicoes`, com
+  botão de mudo que persiste a preferência em `localStorage`. Ver D012
+  pra comparação com alternativas de voz gerada (ElevenLabs etc.).

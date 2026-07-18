@@ -11,8 +11,11 @@ import {
   Brain,
   ChevronLeft,
   ChevronRight,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { PositionField, type SectionKind } from "@/components/position-field";
+import { useSpeech } from "@/lib/use-speech";
 
 type PositionContent = {
   position: string;
@@ -48,19 +51,28 @@ export function PositionsView({ rows }: { rows: PositionContent[] }) {
   );
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [prevActive, setPrevActive] = useState(active);
+  const { speak, stop, muted, toggleMuted, speaking } = useSpeech();
+
+  if (active !== prevActive) {
+    setPrevActive(active);
+    setStep(0);
+  }
 
   const activeRows = rows
     .filter((r) => r.position === active)
     .sort((a, b) => a.order_in_position - b.order_in_position);
 
-  useEffect(() => {
-    setStep(0);
-  }, [active]);
-
   const current = activeRows[step];
   const meta = current
     ? (SECTION_META[current.section] ?? { label: current.section, icon: Compass })
     : null;
+
+  useEffect(() => {
+    if (current) speak(current.content);
+    return () => stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current?.position, current?.section]);
 
   function goTo(next: number) {
     if (next < 0 || next >= activeRows.length) return;
@@ -74,9 +86,9 @@ export function PositionsView({ rows }: { rows: PositionContent[] }) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="card flex flex-col items-center gap-4 p-5 md:flex-row md:items-stretch">
-        <div className="mx-auto w-full max-w-[220px] md:mx-0 md:w-56 md:shrink-0">
+    <div className="flex flex-col gap-6 md:grid md:grid-cols-[260px_1fr] md:items-start md:gap-6">
+      <div className="sticky top-0 z-[5] -mx-4 flex flex-col gap-3 bg-background/95 px-4 pb-3 pt-2 backdrop-blur md:static md:mx-0 md:bg-transparent md:px-0 md:pb-0 md:pt-0 md:backdrop-blur-none">
+        <div className="card p-4">
           <PositionField
             active={active}
             sectionKind={(current?.section as SectionKind) ?? "funcao_tatica"}
@@ -84,12 +96,12 @@ export function PositionsView({ rows }: { rows: PositionContent[] }) {
           />
         </div>
 
-        <div className="flex flex-1 flex-wrap content-center gap-2">
+        <div className="flex flex-wrap gap-2 md:flex-col">
           {POSITIONS.map((pos) => (
             <button
               key={pos}
               onClick={() => selectPosition(pos)}
-              className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm transition ${
+              className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm transition md:rounded-lg md:text-left ${
                 active === pos
                   ? "border-gold bg-gold font-semibold text-black"
                   : "border-border text-muted hover:border-border-light hover:text-foreground"
@@ -136,16 +148,29 @@ export function PositionsView({ rows }: { rows: PositionContent[] }) {
                   transition={{ duration: 0.28, ease: "easeOut" }}
                   className="card min-h-[220px] p-5 md:p-7"
                 >
-                  <div className="mb-4 flex items-center gap-2.5 text-gold">
-                    <meta.icon size={20} />
-                    <div>
-                      <p className="text-[11px] uppercase tracking-wide text-muted">
-                        Etapa {step + 1} de {activeRows.length}
-                      </p>
-                      <p className="text-sm font-semibold uppercase tracking-wide">
-                        {meta.label}
-                      </p>
+                  <div className="mb-4 flex items-center justify-between gap-2.5">
+                    <div className="flex items-center gap-2.5 text-gold">
+                      <meta.icon size={20} />
+                      <div>
+                        <p className="text-[11px] uppercase tracking-wide text-muted">
+                          Etapa {step + 1} de {activeRows.length}
+                        </p>
+                        <p className="text-sm font-semibold uppercase tracking-wide">
+                          {meta.label}
+                        </p>
+                      </div>
                     </div>
+                    <button
+                      onClick={toggleMuted}
+                      aria-label={muted ? "Ativar áudio" : "Silenciar áudio"}
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition ${
+                        speaking
+                          ? "border-gold text-gold-light"
+                          : "border-border text-muted hover:text-foreground"
+                      }`}
+                    >
+                      {muted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+                    </button>
                   </div>
                   <p className="text-[15px] leading-relaxed text-foreground/90">
                     {current.content}

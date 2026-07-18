@@ -2,6 +2,21 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.4.0] — 2026-07-18 — Nome de usuário, layout de Posições e narração
+
+**Detalhes em `sessions/sessao-006.md`.**
+
+### Adicionado
+- Nome de exibição editável (cadastro + Configurações), via `user_metadata` do Supabase Auth — dashboard cumprimenta pelo nome em vez do e-mail
+- Narração em áudio automática por etapa em Posições (Web Speech API, gratuita, botão de mudo)
+
+### Alterado
+- Layout de Posições: campo de futebol fica fixo (sticky no mobile, coluna lateral no desktop) — não some mais durante a leitura do texto
+
+### Corrigido
+- 3 erros de lint (React 19 / eslint-plugin-react-hooks): mutação de variável durante render em `GoalCard`, `setState` síncrono em efeito em `PositionsView` e `useSpeech`
+- Warning de `scroll-behavior: smooth` sem o atributo `data-scroll-behavior` recomendado pelo Next.js
+
 ## [1.3.0] — 2026-07-18 — Sistema de metas com coaching + polish
 
 **Detalhes em `sessions/sessao-005.md`.**

@@ -44,16 +44,18 @@ export default async function DashboardPage() {
   const blocks = blockProgress(withStatuses);
   const streak = computeStreak((progress ?? []).map((p) => p.completed_at));
 
-  const firstName = user?.email?.split("@")[0];
+  const displayName =
+    (user?.user_metadata?.display_name as string | undefined)?.trim() ||
+    user?.email?.split("@")[0];
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-6 md:px-8 md:py-10">
       <FadeIn>
         <h1 className="text-2xl font-bold md:text-3xl">
           {completedCount === 0 ? (
-            <>Bem-vindo, <span className="gold-text-gradient">{firstName}</span></>
+            <>Bem-vindo, <span className="gold-text-gradient">{displayName}</span></>
           ) : (
-            <>Bora continuar, <span className="gold-text-gradient">{firstName}</span></>
+            <>Bora continuar, <span className="gold-text-gradient">{displayName}</span></>
           )}
         </h1>
         <p className="mt-1 text-sm text-muted">

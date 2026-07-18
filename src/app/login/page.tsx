@@ -9,6 +9,7 @@ import { createClient } from "@/lib/supabase/client";
 export default function LoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState<string | null>(null);
@@ -35,7 +36,11 @@ export default function LoginPage() {
       router.push("/dashboard");
       router.refresh();
     } else {
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { display_name: name.trim() } },
+      });
       setLoading(false);
       if (error) {
         setError(error.message);
@@ -63,6 +68,16 @@ export default function LoginPage() {
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          {mode === "signup" && (
+            <input
+              type="text"
+              required
+              placeholder="Seu nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none transition focus:border-gold"
+            />
+          )}
           <input
             type="email"
             required

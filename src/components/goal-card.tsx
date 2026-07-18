@@ -41,7 +41,8 @@ export function GoalCard({ goal, steps }: { goal: Goal; steps: Step[] }) {
     .sort((a, b) => a.order_index - b.order_index);
 
   const completedCount = milestones.filter((m) => m.completed).length;
-  let unlockedNext = true;
+  const firstIncompleteIndex = milestones.findIndex((m) => !m.completed);
+  const unlockedIndex = firstIncompleteIndex === -1 ? milestones.length : firstIncompleteIndex;
 
   return (
     <motion.div layout className="card overflow-hidden">
@@ -97,9 +98,8 @@ export function GoalCard({ goal, steps }: { goal: Goal; steps: Step[] }) {
                     Seu caminho até lá
                   </p>
                   <ul className="flex flex-col gap-2.5">
-                    {milestones.map((m) => {
-                      const isUnlocked = unlockedNext;
-                      if (!m.completed) unlockedNext = false;
+                    {milestones.map((m, i) => {
+                      const isUnlocked = i <= unlockedIndex;
                       const Icon = m.completed ? CheckCircle2 : isUnlocked ? Circle : Lock;
 
                       return (
